@@ -1,6 +1,7 @@
-install: install-deps
+develop:
+	npx webpack serve
 
-install-deps:
+install:
 	npm ci
 
 lint:
@@ -8,3 +9,6 @@ lint:
 
 publish:
 	npm publish --dry-run
+
+build:
+	NODE_ENV=production npx webpack
