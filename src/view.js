@@ -1,9 +1,15 @@
-const urlInput = document.querySelector('#url-input');
+import onChange from 'on-change';
+import state from './state.js';
 
-export default (isValid) => {
-  if (isValid) {
-    urlInput.classList.remove('is-invalid');
+const changeState = onChange(state, () => { });
+const input = document.querySelector('#url-input');
+
+const renderForm = () => {
+  if (!changeState.isValid) {
+    input.classList.add('is-invalid');
   } else {
-    urlInput.classList.add('is-invalid');
+    input.classList.remove('is-invalid');
   }
 };
+
+export default renderForm;
