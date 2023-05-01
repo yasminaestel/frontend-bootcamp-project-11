@@ -32,7 +32,6 @@ export default () => {
         input.value = '';
         input.focus();
       });
-    console.log(state);
   };
 
   form.addEventListener('submit', (e) => {
