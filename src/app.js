@@ -12,6 +12,10 @@ export default () => {
 
     // Проверяем, что URL-адрес не дублируется
     if (state.feeds.some((feed) => feed.url === url)) {
+      state.isValid = false;
+      renderForm();
+      input.value = '';
+      input.focus();
       return;
     }
 
