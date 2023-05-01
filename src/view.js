@@ -5,10 +5,9 @@ const changeState = onChange(state, () => { });
 const input = document.querySelector('#url-input');
 
 const renderForm = () => {
+  input.classList.remove('is-invalid');
   if (!changeState.isValid) {
     input.classList.add('is-invalid');
-  } else {
-    input.classList.remove('is-invalid');
   }
 };
 

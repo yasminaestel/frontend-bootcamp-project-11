@@ -1,4 +1,4 @@
-import yup from 'yup';
+import * as yup from 'yup';
 
 const validateUrl = (url) => {
   const schema = yup.object().shape({
