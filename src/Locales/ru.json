@@ -1,0 +1,10 @@
+{
+  "translation": {
+    "rssAggregator": "RSS Агрегатор",
+    "enterRSSUrl": "Введите URL RSS канала:",
+    "rssUrlPlaceholder": "https://example.com/rss.xml",
+    "add": "Добавить",
+    "invalidUrl": "Неверный URL",
+    "requiredUrl": "Введите URL"
+  }
+}

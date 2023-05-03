@@ -1,0 +1,10 @@
+{
+  "translation": {
+    "rssAggregator": "RSS Aggregator",
+    "enterRSSUrl": "Enter RSS feed URL:",
+    "rssUrlPlaceholder": "https://example.com/rss.xml",
+    "add": "Add",
+    "invalidUrl": "Invalid URL",
+    "requiredUrl": "URL is required"
+  }
+}
