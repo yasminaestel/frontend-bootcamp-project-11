@@ -9,10 +9,12 @@ export default () => {
   const handleSubmit = (event) => {
     const formData = new FormData(event.target);
     const url = formData.get('url');
+    state.error = '';
 
     // Проверяем, что URL-адрес не дублируется
     if (state.feeds.some((feed) => feed.url === url)) {
       state.isValid = false;
+      state.error = 'clone';
       renderForm();
       input.value = '';
       input.focus();
@@ -23,7 +25,6 @@ export default () => {
     validateUrl(url)
       .then(() => {
         state.isValid = true;
-        // Добавляем фид в список
         const feed = { url };
         state.feeds.push(feed);
         renderForm();
@@ -32,6 +33,7 @@ export default () => {
       })
       .catch(() => {
         state.isValid = false;
+        state.error = 'in-valid';
         renderForm();
         input.value = '';
         input.focus();
@@ -41,5 +43,6 @@ export default () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     handleSubmit(e);
+    console.log(state);
   });
 };

@@ -7,15 +7,20 @@ const feedback = document.querySelector('.feedback');
 
 const renderForm = () => {
   input.classList.remove('is-invalid');
-  feedback.classList.remove('text-danger');
+  feedback.classList.remove('text-danger', 'text-success');
   feedback.textContent = '';
   if (!changeState.isValid) {
     input.classList.add('is-invalid');
     feedback.classList.add('text-danger');
-    feedback.textContent = 'Ссылка должна быть валидным URL';
   } else {
     feedback.classList.add('text-success');
+  }
+  if (changeState.error === '') {
     feedback.textContent = 'RSS успешно загружен';
+  } if (changeState.error === 'in-valid') {
+    feedback.textContent = 'Ссылка должна быть валидным URL';
+  } if (changeState.error === 'clone') {
+    feedback.textContent = 'RSS уже существует';
   }
 };
 
