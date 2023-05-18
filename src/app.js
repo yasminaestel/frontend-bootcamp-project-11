@@ -1,33 +1,8 @@
-import i18next from 'i18next';
-import * as yup from 'yup';
 import state from './state.js';
 import validateUrl from './validate.js';
 import renderForm from './view.js';
-import ru from './locales/ru.json';
-import en from './locales/en.json';
 
 export default () => {
-  i18next.use().init({
-    lng: 'en',
-    resources: {
-      en: {
-        translation: en,
-      },
-      ru: {
-        translation: ru,
-      },
-    },
-  });
-
-  yup.setLocale({
-    string: {
-      url: i18next.t('invalidUrl'),
-    },
-    mixed: {
-      required: i18next.t('requiredUrl'),
-    },
-  });
-
   const form = document.querySelector('.rss-form');
   const input = document.querySelector('#url-input');
 
