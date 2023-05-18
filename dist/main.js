@@ -1213,7 +1213,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ \"./node_modules/i18next/dist/esm/i18next.js\");\n/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! yup */ \"./node_modules/yup/index.esm.js\");\n/* harmony import */ var _state_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state.js */ \"./src/state.js\");\n/* harmony import */ var _validate_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./validate.js */ \"./src/validate.js\");\n/* harmony import */ var _view_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./view.js */ \"./src/view.js\");\n/* harmony import */ var _locales_ru_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./locales/ru.json */ \"./src/locales/ru.json\");\n/* harmony import */ var _locales_en_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./locales/en.json */ \"./src/locales/en.json\");\n\n\n\n\n\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {\n  i18next__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use().init({\n    lng: 'en',\n    resources: {\n      en: {\n        translation: _locales_en_json__WEBPACK_IMPORTED_MODULE_6__\n      },\n      ru: {\n        translation: _locales_ru_json__WEBPACK_IMPORTED_MODULE_5__\n      }\n    }\n  });\n  yup__WEBPACK_IMPORTED_MODULE_1__.setLocale({\n    string: {\n      url: i18next__WEBPACK_IMPORTED_MODULE_0__[\"default\"].t('invalidUrl')\n    },\n    mixed: {\n      required: i18next__WEBPACK_IMPORTED_MODULE_0__[\"default\"].t('requiredUrl')\n    }\n  });\n  var form = document.querySelector('.rss-form');\n  var input = document.querySelector('#url-input');\n  var handleSubmit = function handleSubmit(event) {\n    var formData = new FormData(event.target);\n    var url = formData.get('url');\n\n    // Проверяем, что URL-адрес не дублируется\n    if (_state_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].feeds.some(function (feed) {\n      return feed.url === url;\n    })) {\n      _state_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].isValid = false;\n      (0,_view_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])();\n      input.value = '';\n      input.focus();\n      return;\n    }\n\n    // Валидируем URL-адрес с помощью yup\n    (0,_validate_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(url).then(function () {\n      _state_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].isValid = true;\n      // Добавляем фид в список\n      var feed = {\n        url: url\n      };\n      _state_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].feeds.push(feed);\n      (0,_view_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])();\n      input.value = '';\n      input.focus();\n    })[\"catch\"](function () {\n      _state_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].isValid = false;\n      (0,_view_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])();\n      input.value = '';\n      input.focus();\n      var feedback = document.querySelector('.col-md-10');\n      var p = document.createElement('p');\n      p.classList.add('m-0 position-absolute small text-success text-danger');\n      p.textContent = 'Ссылка должна быть валидной';\n      feedback.append = p;\n    });\n  };\n  form.addEventListener('submit', function (e) {\n    e.preventDefault();\n    handleSubmit(e);\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var i18next__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! i18next */ \"./node_modules/i18next/dist/esm/i18next.js\");\n/* harmony import */ var on_change__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! on-change */ \"./node_modules/on-change/index.js\");\n/* harmony import */ var _state_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state.js */ \"./src/state.js\");\n/* harmony import */ var _validate_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./validate.js */ \"./src/validate.js\");\n/* harmony import */ var _view_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./view.js */ \"./src/view.js\");\n/* harmony import */ var _locales_ru_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./locales/ru.js */ \"./src/locales/ru.js\");\n\n\n\n\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {\n  i18next__WEBPACK_IMPORTED_MODULE_0__[\"default\"].init({\n    lng: 'rus',\n    debug: false,\n    resources: {\n      ru: _locales_ru_js__WEBPACK_IMPORTED_MODULE_5__[\"default\"]\n    }\n  }).then(function () {\n    var changeState = (0,on_change__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(_state_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"], (0,_view_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])(i18next__WEBPACK_IMPORTED_MODULE_0__[\"default\"]));\n    var form = document.querySelector('.rss-form');\n    var input = document.querySelector('#url-input');\n    var handleSubmit = function handleSubmit(event) {\n      var formData = new FormData(event.target);\n      var url = formData.get('url');\n      changeState.error = '';\n\n      // Проверяем, что URL-адрес не дублируется\n      if (changeState.feeds.some(function (feed) {\n        return feed.url === url;\n      })) {\n        changeState.isValid = false;\n        changeState.error = 'clone';\n        (0,_view_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])();\n        input.value = '';\n        input.focus();\n        return;\n      }\n\n      // Валидируем URL-адрес с помощью yup\n      (0,_validate_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(url).then(function () {\n        changeState.isValid = true;\n        var feed = {\n          url: url\n        };\n        changeState.feeds.push(feed);\n        (0,_view_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])();\n        input.value = '';\n        input.focus();\n      })[\"catch\"](function () {\n        changeState.isValid = false;\n        changeState.error = 'in-valid';\n        (0,_view_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"])();\n        input.value = '';\n        input.focus();\n      });\n    };\n    form.addEventListener('submit', function (e) {\n      e.preventDefault();\n      handleSubmit(e);\n    });\n  });\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/app.js?");
 
 /***/ }),
 
@@ -1228,6 +1228,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var boot
 
 /***/ }),
 
+/***/ "./src/locales/ru.js":
+/*!***************************!*\
+  !*** ./src/locales/ru.js ***!
+  \***************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  translation: {\n    invalidUrl: 'Ссылка должна быть валидным URL',\n    validUrl: 'RSS успешно загружен',\n    cloneUrl: 'RSS уже существует'\n  }\n});\n\n//# sourceURL=webpack://my-webpack-project/./src/locales/ru.js?");
+
+/***/ }),
+
 /***/ "./src/state.js":
 /*!**********************!*\
   !*** ./src/state.js ***!
@@ -1235,7 +1246,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var boot
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar state = {\n  isValid: true,\n  feeds: []\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (state);\n\n//# sourceURL=webpack://my-webpack-project/./src/state.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar state = {\n  isValid: true,\n  feeds: [],\n  error: ''\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (state);\n\n//# sourceURL=webpack://my-webpack-project/./src/state.js?");
 
 /***/ }),
 
@@ -1257,7 +1268,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var on_change__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! on-change */ \"./node_modules/on-change/index.js\");\n/* harmony import */ var _state_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state.js */ \"./src/state.js\");\n\n\nvar changeState = (0,on_change__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(_state_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"], function () {});\nvar input = document.querySelector('#url-input');\nvar renderForm = function renderForm() {\n  input.classList.remove('is-invalid');\n  if (!changeState.isValid) {\n    input.classList.add('is-invalid');\n  }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderForm);\n\n//# sourceURL=webpack://my-webpack-project/./src/view.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _state_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state.js */ \"./src/state.js\");\n\nvar input = document.querySelector('#url-input');\nvar feedback = document.querySelector('.feedback');\nvar renderForm = function renderForm(i18next) {\n  input.classList.remove('is-invalid');\n  feedback.classList.remove('text-danger', 'text-success');\n  feedback.textContent = '';\n  if (!_state_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].isValid) {\n    input.classList.add('is-invalid');\n    feedback.classList.add('text-danger');\n  } else {\n    feedback.classList.add('text-success');\n  }\n  if (_state_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].error === '') {\n    feedback.textContent = i18next.t('validUrl');\n  }\n  if (_state_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].error === 'in-valid') {\n    feedback.textContent = i18next.t('invalidUrl');\n  }\n  if (_state_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].error === 'clone') {\n    feedback.textContent = i18next.t('clone');\n  }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (renderForm);\n\n//# sourceURL=webpack://my-webpack-project/./src/view.js?");
 
 /***/ }),
 
@@ -1566,28 +1577,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ wrapIterator)\n/* harmony export */ });\n/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants.js */ \"./node_modules/on-change/lib/constants.js\");\n\n\n// eslint-disable-next-line max-params\nfunction wrapIterator(iterator, target, thisArg, applyPath, prepareValue) {\n\tconst originalNext = iterator.next;\n\n\tif (target.name === 'entries') {\n\t\titerator.next = function () {\n\t\t\tconst result = originalNext.call(this);\n\n\t\t\tif (result.done === false) {\n\t\t\t\tresult.value[0] = prepareValue(\n\t\t\t\t\tresult.value[0],\n\t\t\t\t\ttarget,\n\t\t\t\t\tresult.value[0],\n\t\t\t\t\tapplyPath,\n\t\t\t\t);\n\t\t\t\tresult.value[1] = prepareValue(\n\t\t\t\t\tresult.value[1],\n\t\t\t\t\ttarget,\n\t\t\t\t\tresult.value[0],\n\t\t\t\t\tapplyPath,\n\t\t\t\t);\n\t\t\t}\n\n\t\t\treturn result;\n\t\t};\n\t} else if (target.name === 'values') {\n\t\tconst keyIterator = thisArg[_constants_js__WEBPACK_IMPORTED_MODULE_0__.TARGET].keys();\n\n\t\titerator.next = function () {\n\t\t\tconst result = originalNext.call(this);\n\n\t\t\tif (result.done === false) {\n\t\t\t\tresult.value = prepareValue(\n\t\t\t\t\tresult.value,\n\t\t\t\t\ttarget,\n\t\t\t\t\tkeyIterator.next().value,\n\t\t\t\t\tapplyPath,\n\t\t\t\t);\n\t\t\t}\n\n\t\t\treturn result;\n\t\t};\n\t} else {\n\t\titerator.next = function () {\n\t\t\tconst result = originalNext.call(this);\n\n\t\t\tif (result.done === false) {\n\t\t\t\tresult.value = prepareValue(\n\t\t\t\t\tresult.value,\n\t\t\t\t\ttarget,\n\t\t\t\t\tresult.value,\n\t\t\t\t\tapplyPath,\n\t\t\t\t);\n\t\t\t}\n\n\t\t\treturn result;\n\t\t};\n\t}\n\n\treturn iterator;\n}\n\n\n//# sourceURL=webpack://my-webpack-project/./node_modules/on-change/lib/wrap-iterator.js?");
-
-/***/ }),
-
-/***/ "./src/locales/en.json":
-/*!*****************************!*\
-  !*** ./src/locales/en.json ***!
-  \*****************************/
-/***/ ((module) => {
-
-"use strict";
-eval("module.exports = JSON.parse('{\"translation\":{\"rssAggregator\":\"RSS Aggregator\",\"enterRSSUrl\":\"Enter RSS feed URL:\",\"rssUrlPlaceholder\":\"https://example.com/rss.xml\",\"add\":\"Add\",\"invalidUrl\":\"Invalid URL\",\"requiredUrl\":\"URL is required\"}}');\n\n//# sourceURL=webpack://my-webpack-project/./src/locales/en.json?");
-
-/***/ }),
-
-/***/ "./src/locales/ru.json":
-/*!*****************************!*\
-  !*** ./src/locales/ru.json ***!
-  \*****************************/
-/***/ ((module) => {
-
-"use strict";
-eval("module.exports = JSON.parse('{\"translation\":{\"rssAggregator\":\"RSS Агрегатор\",\"enterRSSUrl\":\"Введите URL RSS канала:\",\"rssUrlPlaceholder\":\"https://example.com/rss.xml\",\"add\":\"Добавить\",\"invalidUrl\":\"Неверный URL\",\"requiredUrl\":\"Введите URL\"}}');\n\n//# sourceURL=webpack://my-webpack-project/./src/locales/ru.json?");
 
 /***/ })
 

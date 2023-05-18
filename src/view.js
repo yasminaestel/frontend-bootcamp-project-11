@@ -1,26 +1,25 @@
-import onChange from 'on-change';
 import state from './state.js';
 
-const changeState = onChange(state, () => { });
 const input = document.querySelector('#url-input');
 const feedback = document.querySelector('.feedback');
 
-const renderForm = () => {
+const renderForm = (i18next) => {
   input.classList.remove('is-invalid');
   feedback.classList.remove('text-danger', 'text-success');
   feedback.textContent = '';
-  if (!changeState.isValid) {
+  if (!state.isValid) {
     input.classList.add('is-invalid');
     feedback.classList.add('text-danger');
   } else {
     feedback.classList.add('text-success');
   }
-  if (changeState.error === '') {
-    feedback.textContent = 'RSS успешно загружен';
-  } if (changeState.error === 'in-valid') {
-    feedback.textContent = 'Ссылка должна быть валидным URL';
-  } if (changeState.error === 'clone') {
-    feedback.textContent = 'RSS уже существует';
+
+  if (state.error === 'noError') {
+    feedback.textContent = i18next.t('validUrl');
+  } if (state.error === 'in-valid') {
+    feedback.textContent = i18next.t('invalidUrl');
+  } if (state.error === 'clone') {
+    feedback.textContent = i18next.t('cloneUrl');
   }
 };
 
