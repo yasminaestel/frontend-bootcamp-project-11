@@ -3,7 +3,7 @@ import onChange from 'on-change';
 import state from './state.js';
 import validateUrl from './validate.js';
 import renderForm from './view.js';
-import ru from './locales/ru.js';
+import yupLocale from './locales/yupLocale.js';
 
 export default () => {
   const i18nextInstance = i18next.createInstance();
@@ -11,7 +11,14 @@ export default () => {
     lng: 'ru',
     debug: false,
     resources: {
-      ru,
+      ru: {
+        yup: yupLocale.ru,
+        translation: {
+          invalidUrl: 'Ссылка должна быть валидным URL',
+          validUrl: 'RSS успешно загружен',
+          cloneUrl: 'RSS уже существует',
+        },
+      },
     },
   })
     .then(() => {

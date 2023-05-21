@@ -1,4 +1,7 @@
 import * as yup from 'yup';
+import yupLocale from './locales/yupLocale.js';
+
+yup.setLocale(yupLocale);
 
 const validateUrl = (url) => {
   const schema = yup.object().shape({
