@@ -19,7 +19,7 @@ const renderForm = (i18next) => {
     feedback.textContent = i18next.t('validUrl');
   } else if (state.error === 'in-valid') {
     feedback.textContent = i18next.t('invalidUrl');
-  } else if (state.error === 'duplication') {
+  } else if (state.error === 'duplicationUrl') {
     feedback.textContent = i18next.t('duplicationUrl');
   }
 };

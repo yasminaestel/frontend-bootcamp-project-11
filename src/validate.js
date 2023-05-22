@@ -26,7 +26,7 @@ const handleSubmit = (event) => {
 
   if (changeState.feeds.some((feed) => feed.url === url)) {
     changeState.isValid = false;
-    changeState.error = 'duplication';
+    changeState.error = 'duplicationUrl';
     renderForm(i18nextInstance);
     input.value = '';
     input.focus();
