@@ -19,8 +19,8 @@ const renderForm = (i18next) => {
     feedback.textContent = i18next.t('validUrl');
   } else if (state.error === 'in-valid') {
     feedback.textContent = i18next.t('invalidUrl');
-  } else if (state.error === 'clone') {
-    feedback.textContent = i18next.t('cloneUrl');
+  } else if (state.error === 'duplication') {
+    feedback.textContent = i18next.t('duplicationUrl');
   }
 };
 

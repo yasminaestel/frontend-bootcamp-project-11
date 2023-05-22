@@ -6,7 +6,6 @@ const yupLocale = {
     required: i18next.t('yup:mixed.required'),
   },
   string: {
-    email: i18next.t('yup:string.email'),
     url: i18next.t('yup:string.url'),
   },
 };
