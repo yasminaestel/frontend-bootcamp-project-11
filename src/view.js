@@ -22,6 +22,8 @@ const renderForm = (i18next, state) => {
     feedback.textContent = i18next.t('downloadError');
   } else if (state.error === 'notRss') {
     feedback.textContent = i18next.t('notRss');
+  } else if (state.error === 'networkError') {
+    feedback.textContent = i18next.t('networkError');
   }
 };
 
@@ -39,11 +41,11 @@ const renderFeeds = (feeds) => {
   cardTitle.classList.add('card-title', 'h4');
   cardBody.append(cardTitle);
   cardTitle.textContent = 'Фиды';
+  const listGroup = document.createElement('ul');
+  listGroup.classList.add('list-group', 'border-0', 'rounded-0');
+  card.append(listGroup);
 
   feeds.forEach((feed) => {
-    const listGroup = document.createElement('ul');
-    listGroup.classList.add('list-group', 'border-0', 'rounded-0');
-    card.append(listGroup);
     const listGroupItem = document.createElement('li');
     listGroupItem.classList.add('list-group-item', 'border-0', 'border-end-0');
     listGroup.append(listGroupItem);
@@ -72,13 +74,12 @@ const renderItems = (items) => {
   cardTitle.classList.add('card-title', 'h4');
   cardBody.append(cardTitle);
   cardTitle.textContent = 'Посты';
-  console.log(items);
+  const listGroup = document.createElement('ul');
+  listGroup.classList.add('list-group', 'border-0', 'rounded-0');
+  card.append(listGroup);
 
   items.forEach((array) => {
     array.forEach((item) => {
-      const listGroup = document.createElement('ul');
-      listGroup.classList.add('list-group', 'border-0', 'rounded-0');
-      card.append(listGroup);
       const listGroupItem = document.createElement('li');
       listGroupItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
       listGroup.append(listGroupItem);

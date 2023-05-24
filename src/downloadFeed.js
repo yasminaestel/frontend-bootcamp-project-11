@@ -4,14 +4,15 @@ const downloadFeed = (url) => {
   const newUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${url}`;
   return axios(newUrl)
     .then((response) => {
-      if (response.status === 200) {
-        const { data } = response;
-        return data;
-      }
-      throw new Error('downloadError');
+      const { data } = response;
+      return data;
     })
-    .catch(() => {
-      throw new Error('downloadError');
+    .catch((err) => {
+      if (err.response) {
+        throw new Error('downloadError');
+      } else {
+        throw new Error('networkError');
+      }
     });
 };
 

@@ -6,7 +6,8 @@ export default {
     invalidUrl: 'Ссылка должна быть валидным URL',
     validUrl: 'RSS успешно загружен',
     duplicationUrl: 'RSS уже существует',
-    downloadError: 'Не удалось загрузить ленту',
+    downloadError: '404: невозможно найти данные',
     notRss: 'Ресурс не содержит валидный RSS',
+    networkError: 'Ошибка сети',
   },
 };
