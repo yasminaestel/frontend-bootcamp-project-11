@@ -1,7 +1,9 @@
 const state = {
   isValid: true,
-  feeds: [],
+  links: [],
   error: '',
+  feeds: [],
+  items: [],
 };
 
 export default state;
