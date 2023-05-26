@@ -7,6 +7,7 @@ import state from './state.js';
 import render from './view.js';
 import downloadFeed from './downloadFeed.js';
 import parsedData from './parsedData.js';
+import checkFeeds from './checkFeed.js';
 
 export default () => {
   const i18nextInstance = i18next.createInstance();
@@ -60,6 +61,9 @@ export default () => {
               parentsFeed: newFeed.id,
             }));
             changeState.items.push(newItem);
+          })
+          .then(() => {
+            checkFeeds(changeState);
           })
           .catch((error) => {
             changeState.isValid = false;
