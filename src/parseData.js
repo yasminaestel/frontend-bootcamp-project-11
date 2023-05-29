@@ -1,7 +1,7 @@
 const parsedData = (data) => {
+  const parser = new DOMParser();
   try {
     const xmlData = data.contents;
-    const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlData, 'application/xml');
     const titleElement = xmlDoc.querySelector('channel title');
     const descriptionElement = xmlDoc.querySelector('channel description');

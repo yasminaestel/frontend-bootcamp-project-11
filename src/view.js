@@ -60,7 +60,7 @@ const renderFeeds = (feeds) => {
   });
 };
 
-const renderItems = (items) => {
+const renderItems = (state) => {
   const containerItems = document.querySelector('.posts');
   containerItems.innerHTML = '';
   const card = document.createElement('div');
@@ -78,26 +78,40 @@ const renderItems = (items) => {
   listGroup.classList.add('list-group', 'border-0', 'rounded-0');
   card.append(listGroup);
 
-  items.forEach((item) => {
+  state.items.forEach((item) => {
     const listGroupItem = document.createElement('li');
     listGroupItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
     listGroup.append(listGroupItem);
     const link = document.createElement('a');
     link.setAttribute('href', item.link);
     link.classList.add('fw-bold');
-    link.setAttribute('data-id', item.parentsFeed);
+    link.setAttribute('data-id', item.id);
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
     listGroupItem.append(link);
-    link.textContent = item.link;
+    link.textContent = item.title;
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
     button.classList.add('btn', 'btn-outline-primary', 'btn-sm');
-    button.setAttribute('data-id', item.parentsFeed);
+    button.setAttribute('data-id', item.id);
     button.setAttribute('data-bs-toggle', 'modal');
     button.setAttribute('data-bs-target', '#modal');
     listGroupItem.append(button);
     button.textContent = 'Просмотр';
+    button.addEventListener('click', (event) => {
+      const { target } = event;
+      const postId = target.getAttribute('data-id');
+      const post = state.items.find((it) => it.id === postId);
+      state.readLinks.push(post.id);
+    });
+  });
+};
+
+const renderLinks = (readLinks) => {
+  readLinks.forEach((idLink) => {
+    const readLink = document.querySelector(`[data-id="${idLink}"]`);
+    readLink.classList.remove('fw-bold');
+    readLink.classList.add('fw-normal');
   });
 };
 
@@ -107,7 +121,9 @@ const render = (path, i18next, state) => {
   } if (path === 'feeds') {
     renderFeeds(state.feeds);
   } if (path === 'items') {
-    renderItems(state.items);
+    renderItems(state);
+  } if (path === 'readLinks') {
+    renderLinks(state.readLinks);
   }
 };
 

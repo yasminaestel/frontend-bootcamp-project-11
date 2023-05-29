@@ -4,6 +4,7 @@ const state = {
   error: '',
   feeds: [],
   items: [],
+  readLinks: [],
 };
 
 export default state;

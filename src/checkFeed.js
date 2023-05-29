@@ -6,7 +6,6 @@ const checkFeeds = (state) => {
   const feedPromises = state.links.map((link) => downloadFeed(link.url, state)
     .then((data) => parsedData(data))
     .then((parsData) => {
-      console.log(state);
       const newItems = _.differenceBy(parsData.parsedItems, state.items, 'title');
 
       const itemsToAdd = newItems.map((newItem) => ({
