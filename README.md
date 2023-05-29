@@ -8,11 +8,3 @@ https://rss-aggregator-ovb381ard-yasminaestel.vercel.app/
 
 ### CodeClimate
 [![Maintainability](https://api.codeclimate.com/v1/badges/75151179b9226f8aa5ea/maintainability)](https://codeclimate.com/github/yasminaestel/frontend-bootcamp-project-11/maintainability)
-
-
-This project has been created using **webpack-cli**, you can now run
-
-```
-npm run build
-```
-to bundle your application
