@@ -12,7 +12,10 @@ const renderForm = (i18next, state) => {
     feedback.classList.add('text-success');
   }
 
-  if (state.error === 'noError') {
+  if (state.error === '') {
+    input.classList.remove('is-invalid');
+    feedback.classList.remove('text-danger', 'text-success');
+  } else if (state.error === 'noError') {
     feedback.textContent = i18next.t('validUrl');
   } else if (state.error === 'in-valid') {
     feedback.textContent = i18next.t('invalidUrl');
@@ -24,6 +27,8 @@ const renderForm = (i18next, state) => {
     feedback.textContent = i18next.t('notRss');
   } else if (state.error === 'networkError') {
     feedback.textContent = i18next.t('networkError');
+  } else if (state.error === 'emptyRequest') {
+    feedback.textContent = i18next.t('emptyRequest');
   }
 };
 

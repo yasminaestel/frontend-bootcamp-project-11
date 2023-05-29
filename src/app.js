@@ -68,12 +68,12 @@ export default () => {
           .catch((error) => {
             changeState.isValid = false;
             changeState.error = error.message.replace(/^Error:\s*/, '');
-            input.value = '';
             input.focus();
           });
       };
       form.addEventListener('submit', (e) => {
         e.preventDefault();
+        changeState.error = '';
         handleSubmit(e);
       });
     });

@@ -9,5 +9,6 @@ export default {
     downloadError: '404: невозможно найти данные',
     notRss: 'Ресурс не содержит валидный RSS',
     networkError: 'Ошибка сети',
+    emptyRequest: 'Не должно быть пустым',
   },
 };
