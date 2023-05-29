@@ -111,6 +111,8 @@ const renderItems = (state) => {
       modalTitel.textContent = post.title.replace(/<[^>]*>/g, '');
       const modalBody = document.querySelector('.modal-body');
       modalBody.textContent = post.description.replace(/<[^>]*>/g, '');
+      const btnLink = document.querySelector('.btn-primary');
+      btnLink.setAttribute('href', post.link);
     });
   });
 };
