@@ -84,8 +84,12 @@ const renderItems = (state) => {
     listGroup.append(listGroupItem);
     const link = document.createElement('a');
     link.setAttribute('href', item.link);
-    link.classList.add('fw-bold');
     link.setAttribute('data-id', item.id);
+    if (!state.readLinks.includes(item.id)) {
+      link.classList.add('fw-bold');
+    } else {
+      link.classList.add('fw-normal');
+    }
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
     listGroupItem.append(link);
@@ -103,6 +107,10 @@ const renderItems = (state) => {
       const postId = target.getAttribute('data-id');
       const post = state.items.find((it) => it.id === postId);
       state.readLinks.push(post.id);
+      const modalTitel = document.querySelector('.modal-title');
+      modalTitel.textContent = post.title.replace(/<[^>]*>/g, '');
+      const modalBody = document.querySelector('.modal-body');
+      modalBody.textContent = post.description.replace(/<[^>]*>/g, '');
     });
   });
 };
