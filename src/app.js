@@ -6,7 +6,7 @@ import validateUrl from './validate.js';
 import state from './state.js';
 import render from './view.js';
 import downloadFeed from './downloadFeed.js';
-import parsedData from './parsedData.js';
+import parsedData from './parseData.js';
 import checkFeeds from './checkFeed.js';
 
 export default () => {
@@ -60,7 +60,7 @@ export default () => {
               link: item.link,
               parentsFeed: newFeed.id,
             }));
-            changeState.items.push(newItem);
+            changeState.items.push(...newItem);
           })
           .then(() => {
             checkFeeds(changeState);

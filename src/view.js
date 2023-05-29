@@ -78,28 +78,26 @@ const renderItems = (items) => {
   listGroup.classList.add('list-group', 'border-0', 'rounded-0');
   card.append(listGroup);
 
-  items.forEach((array) => {
-    Array.from(array).forEach((item) => {
-      const listGroupItem = document.createElement('li');
-      listGroupItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
-      listGroup.append(listGroupItem);
-      const link = document.createElement('a');
-      link.setAttribute('href', item.link);
-      link.classList.add('fw-bold');
-      link.setAttribute('data-id', item.parentsFeed);
-      link.setAttribute('target', '_blank');
-      link.setAttribute('rel', 'noopener noreferrer');
-      listGroupItem.append(link);
-      link.textContent = item.link;
-      const button = document.createElement('button');
-      button.setAttribute('type', 'button');
-      button.classList.add('btn', 'btn-outline-primary', 'btn-sm');
-      button.setAttribute('data-id', item.parentsFeed);
-      button.setAttribute('data-bs-toggle', 'modal');
-      button.setAttribute('data-bs-target', '#modal');
-      listGroupItem.append(button);
-      button.textContent = 'Просмотр';
-    });
+  items.forEach((item) => {
+    const listGroupItem = document.createElement('li');
+    listGroupItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
+    listGroup.append(listGroupItem);
+    const link = document.createElement('a');
+    link.setAttribute('href', item.link);
+    link.classList.add('fw-bold');
+    link.setAttribute('data-id', item.parentsFeed);
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+    listGroupItem.append(link);
+    link.textContent = item.link;
+    const button = document.createElement('button');
+    button.setAttribute('type', 'button');
+    button.classList.add('btn', 'btn-outline-primary', 'btn-sm');
+    button.setAttribute('data-id', item.parentsFeed);
+    button.setAttribute('data-bs-toggle', 'modal');
+    button.setAttribute('data-bs-target', '#modal');
+    listGroupItem.append(button);
+    button.textContent = 'Просмотр';
   });
 };
 
