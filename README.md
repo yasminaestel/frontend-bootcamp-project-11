@@ -1,7 +1,7 @@
 # 🚀 Welcome!
 
 # Link
-https://rss-aggregator-ovb381ard-yasminaestel.vercel.app/
+https://rss-aggregator-36wd6fht8-yasminaestel.vercel.app/
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/yasminaestel/frontend-bootcamp-project-11/workflows/hexlet-check/badge.svg)](https://github.com/yasminaestel/frontend-bootcamp-project-11/actions)
