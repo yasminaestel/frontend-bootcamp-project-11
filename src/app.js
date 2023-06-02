@@ -11,6 +11,7 @@ import checkFeeds from './checkFeed.js';
 
 export default () => {
   const i18nextInstance = i18next.createInstance();
+  const changeState = onChange(state, (path) => render(path, i18nextInstance, changeState));
   i18nextInstance.init({
     lng: 'ru',
     debug: false,
@@ -19,7 +20,6 @@ export default () => {
     },
   })
     .then(() => {
-      const changeState = onChange(state, (path) => render(path, i18nextInstance, changeState));
       const input = document.querySelector('#url-input');
       const form = document.querySelector('.rss-form');
 
@@ -62,9 +62,6 @@ export default () => {
             }));
             changeState.items.push(...newItem);
           })
-          .then(() => {
-            checkFeeds(changeState);
-          })
           .catch((error) => {
             changeState.isValid = false;
             changeState.error = error.message.replace(/^Error:\s*/, '');
@@ -76,5 +73,8 @@ export default () => {
         changeState.error = '';
         handleSubmit(e);
       });
+    })
+    .then(() => {
+      checkFeeds(changeState);
     });
 };
