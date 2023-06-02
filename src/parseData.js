@@ -1,4 +1,4 @@
-const parsedData = (data) => {
+const parseData = (data) => {
   const parser = new DOMParser();
   try {
     const xmlData = data.contents;
@@ -20,4 +20,4 @@ const parsedData = (data) => {
   }
 };
 
-export default parsedData;
+export default parseData;

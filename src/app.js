@@ -1,13 +1,11 @@
 import onChange from 'on-change';
-import uniqueId from 'lodash/uniqueId.js';
 import i18next from 'i18next';
 import ru from './locales/ru.js';
 import validateUrl from './validate.js';
 import state from './state.js';
 import render from './view.js';
 import downloadFeed from './downloadFeed.js';
-import parsedData from './parseData.js';
-import checkFeeds from './checkFeed.js';
+import checkFeeds from './checkFeeds.js';
 
 export default () => {
   const i18nextInstance = i18next.createInstance();
@@ -43,24 +41,10 @@ export default () => {
             input.focus();
           })
           .then(() => downloadFeed(url, changeState))
-          .then((xmlData) => {
-            const parserData = parsedData(xmlData, changeState);
+          .then(() => {
             changeState.error = 'noError';
             changeState.links.push({ url });
-            const newFeed = {
-              id: uniqueId(),
-              title: parserData.title,
-              description: parserData.description,
-            };
-            changeState.feeds.push(newFeed);
-            const newItem = parserData.parsedItems.map((item) => ({
-              id: uniqueId(),
-              title: item.title,
-              description: item.description,
-              link: item.link,
-              parentsFeed: newFeed.id,
-            }));
-            changeState.items.push(...newItem);
+            checkFeeds(changeState);
           })
           .catch((error) => {
             changeState.isValid = false;
@@ -73,8 +57,5 @@ export default () => {
         changeState.error = '';
         handleSubmit(e);
       });
-    })
-    .then(() => {
-      checkFeeds(changeState);
     });
 };
