@@ -62,6 +62,9 @@ export default () => {
             }));
             changeState.items.push(...newItem);
           })
+          .then(() => {
+            checkFeeds(changeState);
+          })
           .catch((error) => {
             changeState.isValid = false;
             changeState.error = error.message.replace(/^Error:\s*/, '');
@@ -73,8 +76,5 @@ export default () => {
         changeState.error = '';
         handleSubmit(e);
       });
-    })
-    .then(() => {
-      checkFeeds(changeState);
     });
 };
