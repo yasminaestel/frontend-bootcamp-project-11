@@ -3,7 +3,6 @@ import downloadFeed from './downloadFeed.js';
 import parseData from './parseData.js';
 
 const checkFeeds = (state) => {
-  console.log('op');
   const feedPromises = state.links.map((link) => downloadFeed(link.url)
     .then((data) => parseData(data))
     .then((parsedData) => {
