@@ -2,3 +2,4 @@
 *.log
 coverage
 /dist/
+.DS_Store
