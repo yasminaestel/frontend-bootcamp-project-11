@@ -46,9 +46,6 @@ export default () => {
             changeState.links.push({ url });
             checkFeeds(changeState);
           })
-          .then(() => {
-            checkFeeds(changeState);
-          })
           .catch((error) => {
             changeState.isValid = false;
             changeState.error = error.message.replace(/^Error:\s*/, '');
