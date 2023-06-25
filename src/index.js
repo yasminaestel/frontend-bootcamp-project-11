@@ -1,7 +1,5 @@
-#!/usr/bin/env node
-
 import 'bootstrap';
-import './style.scss';
+import './style.css';
 import app from './app.js';
 
 app();
