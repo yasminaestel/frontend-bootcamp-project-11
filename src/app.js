@@ -2,14 +2,12 @@ import onChange from 'on-change';
 import i18next from 'i18next';
 import ru from './locales/ru.js';
 import validateUrl from './validate.js';
-import state from './state.js';
 import render from './view.js';
 import downloadFeed from './downloadFeed.js';
 import checkFeeds from './checkFeeds.js';
 
 export default () => {
   const i18nextInstance = i18next.createInstance();
-  const changeState = onChange(state, (path) => render(path, i18nextInstance, changeState));
   i18nextInstance.init({
     lng: 'ru',
     debug: false,
@@ -20,6 +18,17 @@ export default () => {
     .then(() => {
       const input = document.querySelector('#url-input');
       const form = document.querySelector('.rss-form');
+
+      const state = {
+        isValid: true,
+        links: [],
+        error: '',
+        feeds: [],
+        items: [],
+        readLinks: [],
+      };
+
+      const changeState = onChange(state, (path) => render(path, i18nextInstance, changeState));
 
       const handleSubmit = (event) => {
         const formData = new FormData(event.target);
