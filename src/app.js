@@ -66,5 +66,19 @@ export default () => {
         changeState.error = '';
         handleSubmit(e);
       });
+
+      const containerItems = document.querySelector('.posts');
+      containerItems.addEventListener('click', (event) => {
+        const { target } = event;
+        const postId = target.getAttribute('data-id');
+        const post = state.items.find((it) => it.id === postId);
+        state.readLinks.push(post.id);
+        const modalTitel = document.querySelector('.modal-title');
+        modalTitel.textContent = post.title.replace(/<[^>]*>/g, '');
+        const modalBody = document.querySelector('.modal-body');
+        modalBody.textContent = post.description.replace(/<[^>]*>/g, '');
+        const btnLink = document.querySelector('.btn-primary');
+        btnLink.setAttribute('href', post.link);
+      });
     });
 };
