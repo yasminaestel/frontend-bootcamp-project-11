@@ -1,10 +1,12 @@
 import onChange from 'on-change';
 import i18next from 'i18next';
+import axios from 'axios';
+import _ from 'lodash';
+import * as yup from 'yup';
+import yupLocale from './locales/yupLocale.js';
 import ru from './locales/ru.js';
-import validateUrl from './validate.js';
 import render from './view.js';
-import downloadFeed from './downloadFeed.js';
-import checkFeeds from './checkFeeds.js';
+import parseData from './parseData.js';
 
 export default () => {
   const i18nextInstance = i18next.createInstance();
@@ -16,6 +18,7 @@ export default () => {
     },
   })
     .then(() => {
+      yup.setLocale(yupLocale);
       const input = document.querySelector('#url-input');
       const form = document.querySelector('.rss-form');
 
@@ -29,6 +32,76 @@ export default () => {
       };
 
       const changeState = onChange(state, (path) => render(path, i18nextInstance, changeState));
+
+      const downloadFeed = (url) => {
+        const newUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${url}`;
+        return axios(newUrl)
+          .then((response) => {
+            const { data } = response;
+            return data;
+          })
+          .catch((err) => {
+            if (err.response) {
+              throw new Error('downloadError');
+            } else {
+              throw new Error('networkError');
+            }
+          });
+      };
+
+      const validateUrl = (url) => {
+        const schema = yup.object().shape({
+          url: yup.string().url().required(),
+        });
+
+        return new Promise((resolve, reject) => {
+          schema
+            .validate({ url })
+            .then(() => {
+              resolve();
+            })
+            .catch((err) => {
+              if (err.name === 'ValidationError' && err.path === 'url') {
+                reject(new Error('invalidUrl'));
+              } else {
+                reject(err);
+              }
+            });
+        });
+      };
+
+      const checkFeeds = () => {
+        const feedPromises = changeState.links.map((link) => downloadFeed(link.url)
+          .then((data) => parseData(data))
+          .then((parsedData) => {
+            const newFeed = changeState.feeds.find((feed) => feed.title === parsedData.title
+              && feed.description === parsedData.description);
+            if (!newFeed) {
+              const feedToAdd = {
+                id: _.uniqueId(),
+                title: parsedData.title,
+                description: parsedData.description,
+              };
+              changeState.feeds.push(feedToAdd);
+            }
+
+            const newItems = _.differenceBy(parsedData.parsedItems, changeState.items, 'title');
+
+            const itemsToAdd = newItems.map((newItem) => ({
+              id: _.uniqueId(),
+              title: newItem.title,
+              description: newItem.description,
+              link: newItem.link,
+              parentsFeed: link.id,
+            }));
+            changeState.items.push(...itemsToAdd);
+          }));
+
+        Promise.all(feedPromises)
+          .then(() => {
+            setTimeout(checkFeeds, 5000);
+          });
+      };
 
       const handleSubmit = (event) => {
         const formData = new FormData(event.target);
